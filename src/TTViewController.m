@@ -180,7 +180,7 @@
   TTLOG(@"MEMORY WARNING FOR %@", self);
 
   if (_hasViewAppeared && !_isViewAppearing) {
-    NSMutableDictionary* state = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* state = [[[NSMutableDictionary alloc] init] autorelease];
     [self persistView:state];
     self.frozenState = state;
   
