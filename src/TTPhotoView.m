@@ -79,11 +79,22 @@
 
 - (void)setImage:(UIImage*)image {
   if (image != _defaultImage || !_photo || self.URL != [_photo URLForVersion:TTPhotoVersionLarge]) {
+#if 0
+    /*
+     * Verve: using the AspectFill (or Fit) seems to screw things up for when we
+     * load the full-sized image.  By simply centering unconditionally, the problem
+     * goes away and you don't get some awfully distorted image as a placeholder.
+     */
     if (image == _defaultImage) {
       self.contentMode = UIViewContentModeCenter;
     } else {
       self.contentMode = UIViewContentModeScaleAspectFill;
     }
+#endif
+    self.contentMode = UIViewContentModeCenter;
+    self.autoresizesSubviews = YES;
+    self.autoresizingMask = 0xfff;
+    self.autoresizesToImage = YES;
     [super setImage:image];
   }
 }
