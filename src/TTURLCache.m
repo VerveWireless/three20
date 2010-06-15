@@ -69,17 +69,28 @@ static NSMutableDictionary* gNamedCaches = nil;
   }
 }
 
++ (BOOL)createPathIfNecessary:(NSString*)path {
+  BOOL succeeded = YES;
+  
+  NSFileManager* fm = [NSFileManager defaultManager];
+  if (![fm fileExistsAtPath:path]) {
+    succeeded = [fm createDirectoryAtPath: path
+              withIntermediateDirectories: YES
+                               attributes: nil
+                                    error: nil];
+  }
+  
+  return succeeded;
+}
+
 + (NSString*)cachePathWithName:(NSString*)name {
   NSArray* paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
   NSString* cachesPath = [paths objectAtIndex:0];
   NSString* cachePath = [cachesPath stringByAppendingPathComponent:name];
-  NSFileManager* fm = [NSFileManager defaultManager];
-  if (![fm fileExistsAtPath:cachesPath]) {
-    [fm createDirectoryAtPath:cachesPath attributes:nil];
-  }
-  if (![fm fileExistsAtPath:cachePath]) {
-    [fm createDirectoryAtPath:cachePath attributes:nil];
-  }
+
+  [self createPathIfNecessary:cachesPath];
+  [self createPathIfNecessary:cachePath];
+  
   return cachePath;
 }
 
@@ -398,7 +409,7 @@ static NSMutableDictionary* gNamedCaches = nil;
   if (fromDisk) {
     NSFileManager* fm = [NSFileManager defaultManager];
     [fm removeItemAtPath:_cachePath error:nil];
-    [fm createDirectoryAtPath:_cachePath attributes:nil];
+    [TTURLCache createPathIfNecessary:_cachePath];
   }
 }
 
@@ -415,7 +426,7 @@ static NSMutableDictionary* gNamedCaches = nil;
     NSDictionary* attrs = [NSDictionary dictionaryWithObject:invalidDate
       forKey:NSFileModificationDate];
 
-    [fm changeFileAttributes:attrs atPath:filePath];
+    [fm setAttributes:attrs ofItemAtPath:filePath error:nil];
   }
 }
 
@@ -428,7 +439,7 @@ static NSMutableDictionary* gNamedCaches = nil;
   NSDirectoryEnumerator* e = [fm enumeratorAtPath:_cachePath];
   for (NSString* fileName; fileName = [e nextObject]; ) {
     NSString* filePath = [_cachePath stringByAppendingPathComponent:fileName];
-    [fm changeFileAttributes:attrs atPath:filePath];
+    [fm setAttributes:attrs ofItemAtPath:filePath error:nil];
   }
 }
 
