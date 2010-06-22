@@ -201,7 +201,7 @@
   TTDCONDITIONLOG(TTDFLAG_VIEWCONTROLLERS, @"MEMORY WARNING FOR %@", self);
 
   if (_hasViewAppeared && !_isViewAppearing) {
-    NSMutableDictionary* state = [[[NSMutableDictionary alloc] init] autorelease];
+    NSMutableDictionary* state = [[NSMutableDictionary alloc] init];
     [self persistView:state];
     self.frozenState = state;
     TT_RELEASE_SAFELY(state);
