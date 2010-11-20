@@ -438,9 +438,9 @@
     [TTBoxStyle styleWithPadding:UIEdgeInsetsMake(8, 8, 8, 8) next:
     [TTTextStyle styleWithFont:TTSTYLEVAR(photoCaptionFont) color:TTSTYLEVAR(photoCaptionTextColor)
                  minimumFontSize:0 shadowColor:[UIColor colorWithWhite:0 alpha:0.9]
-                 shadowOffset:CGSizeMake(0, 1) textAlignment:UITextAlignmentLeft
+                 shadowOffset:CGSizeMake(0, 1) textAlignment:UITextAlignmentCenter
                  verticalAlignment:UIControlContentVerticalAlignmentCenter
-                 lineBreakMode:UILineBreakModeTailTruncation numberOfLines:15 next:nil]]]];
+                 lineBreakMode:UILineBreakModeTailTruncation numberOfLines:6 next:nil]]]];
 }
 
 - (TTStyle*)photoStatusLabel {
@@ -729,7 +729,7 @@
 }
 
 - (UIFont*)photoCaptionFont {
-  return [UIFont systemFontOfSize:13];
+  return [UIFont boldSystemFontOfSize:12];
 }
 
 - (UIFont*)messageFont {
