@@ -29,7 +29,7 @@ static const NSTimeInterval kFlushDelay = 0.3;
 static const NSTimeInterval kTimeout = 300.0;
 static const NSInteger kLoadMaxRetries = 2;
 static const NSInteger kMaxConcurrentLoads = 5;
-static NSUInteger kDefaultMaxContentLength = 150000;
+static NSUInteger kDefaultMaxContentLength = 200000;
 
 static NSString* kSafariUserAgent = @"Mozilla/5.0 (iPhone; U; CPU iPhone OS 2_2 like Mac OS X;\
  en-us) AppleWebKit/525.181 (KHTML, like Gecko) Version/3.1.1 Mobile/5H11 Safari/525.20";
