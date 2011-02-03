@@ -137,8 +137,7 @@ static NSMutableDictionary* gNamedCaches = nil;
 
 - (UIImage*)loadImageFromBundle:(NSString*)URL {
   NSString* path = TTPathForBundleResource([URL substringFromIndex:9]);
-  NSData* data = [NSData dataWithContentsOfFile:path];
-  return [UIImage imageWithData:data];
+  return [UIImage imageWithContentsOfFile:path];
 }
 
 - (UIImage*)loadImageFromDocuments:(NSString*)URL {
